@@ -265,6 +265,7 @@ class TestDelete(TestBase):
         req = RequestContainer(url_params=dict(id=id_), body_args=dict(first=2))
         resource = self.resource_class.delete(req)
         self.assertDictEqual(resource.properties, {})
+        self.assertEqual(resource.status_code, 204)
         self.assertNotIn(id_, self.manager.objects)
 
     def test_delete_manager_fields(self):
