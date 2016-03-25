@@ -61,6 +61,18 @@ class TestBoringJSONAdapter(unittest2.TestCase):
         response = BasicJSONAdapter.format_request(request)
         self.assertIs(response, request)
 
+    def test_empty_response(self):
+        """
+        Tests whether an empty body is returned when the status_code
+        is 204
+        """
+        class MyResource(ResourceBase):
+            pass
+
+        res = MyResource(properties=dict(x='something'), status_code=204)
+        adapter = BasicJSONAdapter(res)
+        self.assertEqual(adapter.formatted_body, '')
+
     def test_append_relationships_to_list_list_relationship(self):
         """
         Tests whether the relationships are appropriately

@@ -26,9 +26,15 @@ class HalAdapter(AdapterBase):
     @property
     def formatted_body(self):
         """
+        Gets the formatted body of the response in unicode form.
+        If ``self.status_code == 204`` then this will
+        return an empty string.
+
         :return: The response body for the resource.
         :rtype: unicode
         """
+        if self.status_code == 204:
+            return ''
         response = self._construct_resource(self.resource)
         return json.dumps(response)
 

@@ -115,6 +115,17 @@ class TestHalAdapter(unittest2.TestCase):
         adapter = HalAdapter(None)
         self.assertEqual(adapter.extra_headers, {'Content-Type': 'application/hal+json'})
 
+    def test_empty_response(self):
+        """
+        Tests whether an empty body is returned when the status_code
+        is 204
+        """
+        class Fake(ResourceBase):
+            pass
+        res = Fake(properties=dict(x='something'), status_code=204)
+        adapter = HalAdapter(res)
+        self.assertEqual(adapter.formatted_body, '')
+
     def test_list_relationship_not_all_pks(self):
         class Fake(ResourceBase):
             pks = ['id']

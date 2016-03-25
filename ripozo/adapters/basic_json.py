@@ -46,11 +46,17 @@ class BasicJSONAdapter(AdapterBase):
     @property
     def formatted_body(self):
         """
+        Gets the formatted body of the response in unicode form.
+        If ``self.status_code == 204`` then this will
+        return an empty string.
+
         :return: The formatted body that should be returned.
             It's just a ``json.dumps`` of the properties and
             relationships
         :rtype: unicode
         """
+        if self.status_code == 204:
+            return ''
         response = dict()
         parent_properties = self.resource.properties.copy()
         self._append_relationships_to_list(response, self.resource.related_resources)
