@@ -48,6 +48,7 @@ setup(
         'unittest2',
         'tox',
         'mock',
+        'werkzeug>=0.8.3'
     ],
     test_suite="ripozo_tests",
     url='http://ripozo.readthedocs.org/',

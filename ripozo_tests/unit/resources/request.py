@@ -3,10 +3,10 @@ from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
 
+import unittest2
+
 from ripozo.resources.constants.input_categories import QUERY_ARGS, BODY_ARGS, URL_PARAMS
 from ripozo.resources.request import RequestContainer
-
-import unittest2
 
 
 class TestRequestContainer(unittest2.TestCase):

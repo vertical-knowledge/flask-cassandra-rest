@@ -6,7 +6,11 @@ from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
 
+import logging
+
 from ripozo.resources.constants import input_categories
+
+_LOG = logging.getLogger(__name__)
 
 
 class RequestContainer(object):
@@ -18,7 +22,7 @@ class RequestContainer(object):
     and no property is guaranteed.
     """
 
-    def __init__(self, url_params=None, query_args=None, body_args=None, headers=None, method=None):
+    def __init__(self, url_params=None, query_args=None, body_args=None, headers=None, method=None, environ=None):
         """
         Create a new request container.  Typically this is constructed
         in the dispatcher.
@@ -37,6 +41,7 @@ class RequestContainer(object):
         self._query_args = query_args or {}
         self._body_args = body_args or {}
         self._headers = headers or {}
+        self.environ = environ or {}
         self.method = method
 
     @property
@@ -114,11 +119,11 @@ class RequestContainer(object):
         :rtype: object
         :raises: KeyError
         """
-        if not location and name in self._url_params or location == input_categories.URL_PARAMS:
+        if (not location and name in self._url_params) or location == input_categories.URL_PARAMS:
             return self.url_params.get(name)
-        elif not location and name in self._query_args or location == input_categories.QUERY_ARGS:
+        elif (not location and name in self._query_args) or location == input_categories.QUERY_ARGS:
             return self._query_args.get(name)
-        elif not location and name in self._body_args or location == input_categories.BODY_ARGS:
+        elif (not location and name in self._body_args) or location == input_categories.BODY_ARGS:
             return self._body_args.get(name, default)
         return default
 
