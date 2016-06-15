@@ -273,6 +273,18 @@ class TestJSONAPIAdapter(unittest2.TestCase):
         self.assertDictEqual(body['links'], dict(self='/my_resource/1'))
         self.assertDictEqual(body['attributes'], dict(id=1))
 
+    def test_empty_response(self):
+        """
+        Tests whether an empty body is returned when the status_code
+        is 204
+        """
+        class MyResource(ResourceBase):
+            pks = 'id',
+
+        res = MyResource(properties=dict(x='something'), status_code=204)
+        adapter = JSONAPIAdapter(res)
+        self.assertEqual(adapter.formatted_body, '')
+
     def test_no_pks_resource_construct_id(self):
         """
         Tests that a response is appropriately returned

@@ -35,10 +35,14 @@ class JSONAPIAdapter(AdapterBase):
         """
         Returns a string in the
         `JSON API format. <http://jsonapi.org/format/>`_
+        If ``self.status_code == 204`` then this will
+        return an empty string.
 
         :return: The appropriately formatted string
         :rtype: unicode|str
         """
+        if self.status_code == 204:
+            return ''
         data = self._construct_data(self.resource, embedded=True)
         return json.dumps(dict(data=data))
 
