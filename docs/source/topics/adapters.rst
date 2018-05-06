@@ -25,7 +25,7 @@ have to change your front-end.  Either way, you
 want some flexibility in how the resource gets formatted.
 
 For an example of a basic adapter check out the built in
-`JSON adapter. <https://github.com/vertical-knowledge/ripozo/blob/master/ripozo/adapters/boring_json.py>`_
+`JSON adapter. <https://github.com/vertical-knowledge/ripozo/blob/master/ripozo/adapters/basic_json.py>`_
 
 Required pieces
 ^^^^^^^^^^^^^^^
